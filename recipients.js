@@ -107,7 +107,7 @@ const validateEmailAddress = (emailAddress) => {
  * @returns {string} A formatted copy of the email address.
  */
 const formatEmailAddress = (emailAddress) => {
-  return formatters.stripAndRemoveObscureWhitespace(emailAddress.toLower());
+  return formatters.stripAndRemoveObscureWhitespace(emailAddress.toLowerCase());
 };
 
 /**
