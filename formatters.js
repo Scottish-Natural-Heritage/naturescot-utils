@@ -44,4 +44,30 @@ const stripAndRemoveObscureWhitespace = (value) => {
   return modifiedValue;
 };
 
-module.exports = {stripAndRemoveObscureWhitespace};
+const whitespace = [
+  '\u0020', // Space
+  '\u0009', // Tab
+  '\u000A', // Linefeed
+  '\u000D', // Return
+  '\u000C', // Formfeed
+  '\u000B' // Vertical tab
+];
+
+/**
+ *
+ * @param {string} value
+ * @returns {string}
+ */
+const removeWhitespace = (value) => {
+  let modifiedValue = value;
+  for (const char of [...whitespace, ...obscureWhitespace]) {
+    while (modifiedValue.includes(char)) {
+      modifiedValue = modifiedValue.replace(char, '');
+    }
+  }
+
+  modifiedValue = modifiedValue.trim();
+  return modifiedValue;
+};
+
+module.exports = {stripAndRemoveObscureWhitespace, removeWhitespace};
