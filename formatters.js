@@ -54,9 +54,13 @@ const whitespace = [
 ];
 
 /**
+ * Formats a string by removing whitespace.
  *
- * @param {string} value
- * @returns {string}
+ * Originally found in `notifications_utils/formatters.py#L337-L341`, at
+ * the above repo.
+ *
+ * @param {string} value Candidate postcode to be formatted.
+ * @returns {string} Modified version of the postcode with whitespace removed.
  */
 const removeWhitespace = (value) => {
   let modifiedValue = value;
