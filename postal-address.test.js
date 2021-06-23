@@ -14,7 +14,10 @@ const postalAddress = require('.').postalAddress;
  * The only differences between this file and theirs are the translation
  * from python to javascript and some tidying to match our linter rules.
  */
-
+/**
+ * Originally found in `tests/test_postal_address.py#L524-L533`
+ * at the above repo.
+ */
 test('test postcodes are normalised', (t) => {
   const postcodes = ['SW1 3EF', 'SW13EF', 'sw13ef', 'Sw13ef', 'sw1 3ef', ' SW1    3EF  '];
 
@@ -23,6 +26,10 @@ test('test postcodes are normalised', (t) => {
   }
 });
 
+/**
+ * Originally found in `tests/test_postal_address.py#L36-L569`
+ * at the above repo.
+ */
 test('test valid postcodes are valid', (t) => {
   const postcodes = [
     // Real standard UK postcodes.
@@ -46,6 +53,10 @@ test('test valid postcodes are valid', (t) => {
   }
 });
 
+/**
+ * Originally found in `tests/test_postal_address.py#L524-L533`
+ * at the above repo.
+ */
 test('test invalid postcodes are invalid', (t) => {
   const postcodes = [
     // Invalid / incomplete postcodes.
@@ -65,6 +76,10 @@ test('test invalid postcodes are invalid', (t) => {
   }
 });
 
+/**
+ * Originally found in `tests/test_postal_address.py#L578-L595`
+ * at the above repo.
+ */
 test('test postcodes are formatted', (t) => {
   const postcodeSets = [
     ['SW13EF', 'SW1 3EF'],
