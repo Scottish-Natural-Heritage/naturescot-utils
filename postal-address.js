@@ -12,7 +12,6 @@ const formatters = require('./formatters.js');
  * from python to javascript and some tidying to match our linter rules.
  */
 
-
 /**
  * Formats the postcode for regex checking by removing whitespace, obscure whitespace and
  * converting it to uppercase.
@@ -20,8 +19,8 @@ const formatters = require('./formatters.js');
  * Originally found in `notifications_utils/postal_address.py#L150-L151`, at
  * the above repo.
  *
- * @param {string} postcode The postcode entered by the candidate
- * @returns {string} normalisePostcode The postcode after being reformated with whitespace removed
+ * @param {string} postcode The candidate postcode to be validated.
+ * @returns {string} The postcode after being formatted with whitespace removed.
  */
 const normalisePostcode = (postcode) => {
   return formatters.removeWhitespace(postcode).toUpperCase();
@@ -33,8 +32,8 @@ const normalisePostcode = (postcode) => {
  * Originally found in `notifications_utils/postal_address.py#L154-L160`, at
  * the above repo.
  *
- * @param {string} postcode The postcode entered by the candidate
- * @returns {boolean} pattern.test A boolean confirmation of a pattern being present
+ * @param {string} postcode The candidate postcode to be validated.
+ * @returns {boolean} `true` if the postcode is valid, otherwise `false`.
  */
 const isaRealUkPostcode = (postcode) => {
   const standard = '(^[A-Z]{1,2}[0-9][0-9A-Z]?[0-9][A-BD-HJLNP-UW-Z]{2}$)';
@@ -51,8 +50,8 @@ const isaRealUkPostcode = (postcode) => {
  * Originally found in `notifications_utils/postal_address.py#L163-L173`, at
  * the above repo.
  *
- * @param {string} postcode The postcode entered by the candidate.
- * @returns {string} normalised a version of the postcode reformated.
+ * @param {string} postcode The candidate postcode to be validated.
+ * @returns {string} A version of the postcode formatted.
  */
 const formatPostcodeForPrinting = (postcode) => {
   const normalised = normalisePostcode(postcode);
