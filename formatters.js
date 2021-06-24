@@ -44,4 +44,34 @@ const stripAndRemoveObscureWhitespace = (value) => {
   return modifiedValue;
 };
 
-module.exports = {stripAndRemoveObscureWhitespace};
+const whitespace = [
+  '\u0020', // Space
+  '\u0009', // Tab
+  '\u000A', // Linefeed
+  '\u000D', // Return
+  '\u000C', // Formfeed
+  '\u000B' // Vertical tab
+];
+
+/**
+ * Formats a string by removing whitespace.
+ *
+ * Originally found in `notifications_utils/formatters.py#L337-L341`, at
+ * the above repo.
+ *
+ * @param {string} value Candidate postcode to be formatted.
+ * @returns {string} Modified version of the postcode with whitespace removed.
+ */
+const removeWhitespace = (value) => {
+  let modifiedValue = value;
+  for (const char of [...whitespace, ...obscureWhitespace]) {
+    while (modifiedValue.includes(char)) {
+      modifiedValue = modifiedValue.replace(char, '');
+    }
+  }
+
+  modifiedValue = modifiedValue.trim();
+  return modifiedValue;
+};
+
+module.exports = {stripAndRemoveObscureWhitespace, removeWhitespace};

@@ -1,6 +1,6 @@
 {
   "name": "naturescot-utils",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Shared code between NatureScot applications",
   "homepage": "https://github.com/Scottish-Natural-Heritage/naturescot-utils#readme",
   "bugs": {
@@ -8,7 +8,8 @@
   },
   "license": "(MIT OR OGL-UK-3.0 OR Apache-2.0)",
   "contributors": [
-    "Mike Coats <mike.coats@nature.scot> (https://github.com/MikeCoats)"
+    "Mike Coats <mike.coats@nature.scot> (https://github.com/MikeCoats)",
+    "Murray Holmes <murray.holmes@nature.scot> (https://github.com/murrayholmes96)"
   ],
   "files": [
     "**/*.js",
