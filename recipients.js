@@ -29,37 +29,35 @@ const emailRegexPattern = new RegExp(`^[${validLocalChars}]+@([^.@][^@\\s]+)$`);
 // United Kingdom country prefix.
 const ukPrefix = '44';
 
+// Disable as linter wants new line between each element in the COUNTRY_PREFIXES array and this looks silly.
+/* eslint-disable prettier/prettier */
+
 // Originally found in and extracted from `notifications_utils/international_billing_rates.yml#line 44 - line 2891` at the above repo.
-const COUNTRY_PREFIXES = ['1876', '1869', '1868', '1784', '1767', '1758',
-                          '1721', '1684', '1664', '1649', '1473', '1441',
-                          '1345', '1284', '1268', '1264', '1246', '1242',
-                          '998', '996', '995', '994', '993', '992', '977',
-                          '976', '975', '974', '973', '972', '971', '970',
-                          '968', '967', '966', '965', '964', '963', '962',
-                          '961', '960', '886', '880', '856', '855', '853',
-                          '852', '692', '691', '689', '687', '685', '682',
-                          '680', '679', '678', '677', '676', '675', '674',
-                          '673', '672', '670', '599', '598', '597', '596',
-                          '595', '594', '593', '592', '591', '590', '509',
-                          '508', '507', '506', '505', '504', '503', '502',
-                          '501', '500', '423', '421', '420', '389', '387',
-                          '386', '385', '382', '381', '380', '378', '377',
-                          '376', '375', '374', '373', '372', '371', '370',
-                          '359', '358', '357', '356', '355', '354', '353',
-                          '352', '351', '350', '299', '298', '297', '269',
-                          '268', '267', '266', '265', '264', '263', '262',
-                          '261', '260', '258', '257', '256', '255', '254',
-                          '253', '252', '251', '250', '249', '248', '246',
-                          '245', '244', '243', '242', '241', '240', '239',
-                          '238', '237', '236', '235', '234', '233', '232',
-                          '231', '230', '229', '228', '227', '226', '225',
-                          '224', '223', '222', '221', '220', '218', '216',
-                          '213', '212', '211', '98', '95', '94', '93', '92',
-                          '91', '90', '86', '84', '82', '81', '66', '65', '64',
-                          '63', '62', '61', '60', '58', '57', '56', '55', '54',
-                          '53', '52', '51', '49', '48', '47', '46', '45', '44',
-                          '43', '41', '40', '39', '36', '34', '33', '32', '31',
-                          '30', '27', '20', '7', '1']
+const COUNTRY_PREFIXES = [
+  '1876', '1869', '1868', '1784', '1767', '1758', '1721', '1684', '1664',
+  '1649', '1473', '1441', '1345', '1284', '1268', '1264', '1246', '1242',
+  '998', '996', '995', '994', '993', '992', '977', '976', '975', '974',
+  '973', '972', '971', '970', '968', '967', '966', '965', '964', '963',
+  '962', '961', '960', '886', '880', '856', '855', '853', '852', '692',
+  '691', '689', '687', '685', '682', '680', '679', '678', '677', '676',
+  '675', '674', '673', '672', '670', '599', '598', '597', '596', '595',
+  '594', '593', '592', '591', '590', '509', '508', '507', '506', '505',
+  '504', '503', '502', '501', '500', '423', '421', '420', '389', '387',
+  '386', '385', '382', '381', '380', '378', '377', '376', '375', '374',
+  '373', '372', '371', '370', '359', '358', '357', '356', '355', '354',
+  '353', '352', '351', '350', '299', '298', '297', '269', '268', '267',
+  '266', '265', '264', '263', '262', '261', '260', '258', '257', '256',
+  '255', '254', '253', '252', '251', '250', '249', '248', '246', '245',
+  '244', '243', '242', '241', '240', '239', '238', '237', '236', '235',
+  '234', '233', '232', '231', '230', '229', '228', '227', '226', '225',
+  '224', '223', '222', '221', '220', '218', '216', '213', '212', '211',
+  '98', '95', '94', '93', '92', '91', '90', '86', '84', '82', '81', '66',
+  '65', '64', '63', '62', '61', '60', '58', '57', '56', '55', '54', '53',
+  '52', '51', '49', '48', '47', '46', '45', '44', '43', '41', '40', '39',
+  '36', '34', '33', '32', '31', '30', '27', '20', '7', '1'
+];
+
+/* eslint-enable prettier/prettier */
 
 /**
  * Validates that an email address matches the rules required to be
@@ -164,7 +162,7 @@ const validateAndFormatEmailAddress = (emailAddress) => {
  * Validates an international prefix against an array of international prefixes.
  *
  * @param {string} phoneNumber The phone number whose prefix is to be validated.
- * @returns Returns true if prefix is valid, else false.
+ * @returns {boolean} Returns true if prefix is valid, else false.
  */
 const validateInternationalPrefix = (phoneNumber) => {
   for (const prefix in COUNTRY_PREFIXES) {
@@ -174,33 +172,33 @@ const validateInternationalPrefix = (phoneNumber) => {
   }
 
   return false;
-}
+};
 
 /**
  * Normalises a phone number by removing all whitespace, brackets, and `-` and `+` characters, then checks
  * we have an actual number before removing any leading zero.
  *
  * @param {string} phoneNumber The phone number to normalise.
- * @returns Returns the normalised phone number.
+ * @returns {string} Returns the normalised phone number.
  */
 const normalisePhoneNumber = (phoneNumber) => {
-  for (let char of formatters.allWhitespace + '()-+') {
+  for (const char of formatters.allWhitespace + '()-+') {
     phoneNumber = phoneNumber.replace(char, '');
   }
 
-  if (NaN === Number.parseInt(phoneNumber)) {
-    throw new Error('Must not contain letters or symbols');
+  if (Number.isNaN(Number.parseInt(phoneNumber, 10))) {
+    throw new TypeError('Must not contain letters or symbols');
   }
 
-  return lStrip(phoneNumber, '0');
-}
+  return lTrim(phoneNumber, '0');
+};
 
 /**
- * Checks is a phone number is a UK number or not, checking the number starts with 0 and not 00,
+ * Checks a phone number is a UK number or not, checking the number starts with 0 and not 00,
  * then normalising the number and checking if it has a UK country prefix or starts with 7.
  *
  * @param {string} phoneNumber The phone number to check.
- * @returns Returns true if number is a UK number, else false.
+ * @returns {boolean} Returns true if number is a UK number, else false.
  */
 const isUkPhoneNumber = (phoneNumber) => {
   if (phoneNumber.startsWith('0') && !phoneNumber.startsWith('00')) {
@@ -214,17 +212,17 @@ const isUkPhoneNumber = (phoneNumber) => {
   }
 
   return false;
-}
+};
 
 /**
  * Validates that a phone number is a genuine UK phone number.
  *
  * @param {string} phoneNumber The phone number to validate.
- * @returns Returns the number prefixed with the UK country prefix (44).
+ * @returns {string} Returns the number prefixed with the UK country prefix (44).
  */
 const validateUkPhoneNumber = (phoneNumber) => {
-  phoneNumber = normalisePhoneNumber(phoneNumber)
-  phoneNumber = lTrim(phoneNumber, ukPrefix)
+  phoneNumber = normalisePhoneNumber(phoneNumber);
+  phoneNumber = lTrim(phoneNumber, ukPrefix);
   phoneNumber = lTrim(phoneNumber, '0');
 
   if (phoneNumber.length < 8) {
@@ -236,14 +234,14 @@ const validateUkPhoneNumber = (phoneNumber) => {
   }
 
   return ukPrefix + phoneNumber;
-}
+};
 
 /**
  * Validates a phone number, first checking if its a UK number or not, then checking its length and
  * if it has a valid country prefix.
  *
  * @param {*} phoneNumber The phone number to validate.
- * @returns Returns the phone number if it passes validation, else throws an error.
+ * @returns {string} Returns the phone number if it passes validation, else throws an error.
  */
 const validatePhoneNumber = (phoneNumber) => {
   if (isUkPhoneNumber(phoneNumber)) {
@@ -265,15 +263,14 @@ const validatePhoneNumber = (phoneNumber) => {
   }
 
   return phoneNumber;
-
-}
+};
 
 /**
  * Trims the given characters from the start of a given string.
  *
- * @param {*} string The string to trim.
- * @param {*} chars The characters to be trimmed from the string.
- * @returns Returns the trimmed string.
+ * @param {string} string The string to trim.
+ * @param {string} chars The characters to be trimmed from the string.
+ * @returns {string} Returns the trimmed string.
  */
 const lTrim = (string, chars) => {
   let start = 0;
@@ -283,6 +280,6 @@ const lTrim = (string, chars) => {
   }
 
   return string.substr(start);
-}
+};
 
-module.exports = {validateEmailAddress, validateAndFormatEmailAddress};
+module.exports = {validateEmailAddress, validateAndFormatEmailAddress, validatePhoneNumber};
