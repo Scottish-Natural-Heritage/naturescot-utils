@@ -22,6 +22,8 @@ const obscureWhitespace = [
   '\uFEFF' // Zero width non-breaking space
 ];
 
+const allWhitespace = whitespace + obscureWhitespace;
+
 /**
  * Formats a string by removing obscure whitespace and stripping regular
  * leading and trailing whitespace.
@@ -74,4 +76,4 @@ const removeWhitespace = (value) => {
   return modifiedValue;
 };
 
-module.exports = {stripAndRemoveObscureWhitespace, removeWhitespace};
+module.exports = {stripAndRemoveObscureWhitespace, removeWhitespace, allWhitespace};
