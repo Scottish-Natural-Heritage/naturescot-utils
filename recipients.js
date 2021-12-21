@@ -172,7 +172,7 @@ const validateAndFormatEmailAddress = (emailAddress) => {
  * @returns {boolean} Returns true if prefix is valid, else false.
  */
 const validateInternationalPrefix = (phoneNumber) => {
-  for (const prefix in COUNTRY_PREFIXES) {
+  for (const prefix of COUNTRY_PREFIXES) {
     if (phoneNumber.startsWith(prefix)) {
       return true;
     }
