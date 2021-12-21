@@ -34,27 +34,34 @@ const ukPrefix = '44';
 
 // Originally found in and extracted from `notifications_utils/international_billing_rates.yml#line 44 - line 2891` at the above repo.
 const COUNTRY_PREFIXES = [
-  '1876', '1869', '1868', '1784', '1767', '1758', '1721', '1684', '1664',
-  '1649', '1473', '1441', '1345', '1284', '1268', '1264', '1246', '1242',
-  '998', '996', '995', '994', '993', '992', '977', '976', '975', '974',
-  '973', '972', '971', '970', '968', '967', '966', '965', '964', '963',
-  '962', '961', '960', '886', '880', '856', '855', '853', '852', '692',
-  '691', '689', '687', '685', '682', '680', '679', '678', '677', '676',
-  '675', '674', '673', '672', '670', '599', '598', '597', '596', '595',
-  '594', '593', '592', '591', '590', '509', '508', '507', '506', '505',
-  '504', '503', '502', '501', '500', '423', '421', '420', '389', '387',
-  '386', '385', '382', '381', '380', '378', '377', '376', '375', '374',
-  '373', '372', '371', '370', '359', '358', '357', '356', '355', '354',
-  '353', '352', '351', '350', '299', '298', '297', '269', '268', '267',
-  '266', '265', '264', '263', '262', '261', '260', '258', '257', '256',
-  '255', '254', '253', '252', '251', '250', '249', '248', '246', '245',
-  '244', '243', '242', '241', '240', '239', '238', '237', '236', '235',
-  '234', '233', '232', '231', '230', '229', '228', '227', '226', '225',
-  '224', '223', '222', '221', '220', '218', '216', '213', '212', '211',
-  '98', '95', '94', '93', '92', '91', '90', '86', '84', '82', '81', '66',
-  '65', '64', '63', '62', '61', '60', '58', '57', '56', '55', '54', '53',
-  '52', '51', '49', '48', '47', '46', '45', '44', '43', '41', '40', '39',
-  '36', '34', '33', '32', '31', '30', '27', '20', '7', '1'
+  '1876', '1869', '1868', '1784', '1767', '1758', '1721',
+  '1684', '1664', '1649', '1473', '1441', '1345', '1284',
+  '1268', '1264', '1246', '1242',
+  '998', '996', '995', '994', '993', '992', '977', '976',
+  '975', '974', '973', '972', '971', '970', '968', '967',
+  '966', '965', '964', '963', '962', '961', '960', '886',
+  '880', '856', '855', '853', '852', '692', '691', '689',
+  '687', '685', '682', '680', '679', '678', '677', '676',
+  '675', '674', '673', '672', '670', '599', '598', '597',
+  '596', '595', '594', '593', '592', '591', '590', '509',
+  '508', '507', '506', '505', '504', '503', '502', '501',
+  '500', '423', '421', '420', '389', '387', '386', '385',
+  '382', '381', '380', '378', '377', '376', '375', '374',
+  '373', '372', '371', '370', '359', '358', '357', '356',
+  '355', '354', '353', '352', '351', '350', '299', '298',
+  '297', '269', '268', '267', '266', '265', '264', '263',
+  '262', '261', '260', '258', '257', '256', '255', '254',
+  '253', '252', '251', '250', '249', '248', '246', '245',
+  '244', '243', '242', '241', '240', '239', '238', '237',
+  '236', '235', '234', '233', '232', '231', '230', '229',
+  '228', '227', '226', '225', '224', '223', '222', '221',
+  '220', '218', '216', '213', '212', '211',
+  '98', '95', '94', '93', '92', '91', '90', '86', '84', '82',
+  '81', '66', '65', '64', '63', '62', '61', '60', '58', '57',
+  '56', '55', '54', '53', '52', '51', '49', '48', '47', '46',
+  '45', '44', '43', '41', '40', '39', '36', '34', '33', '32',
+  '31', '30', '27', '20',
+  '7', '1'
 ];
 
 /* eslint-enable prettier/prettier */
@@ -182,11 +189,14 @@ const validateInternationalPrefix = (phoneNumber) => {
  * @returns {string} Returns the normalised phone number.
  */
 const normalisePhoneNumber = (phoneNumber) => {
-  for (const char of formatters.allWhitespace + '()-+') {
-    phoneNumber = phoneNumber.replace(char, '');
+  const charactersToRemove = formatters.allWhitespace;
+  charactersToRemove.push('(', ')', '-', '+');
+
+  for (const char of charactersToRemove) {
+    phoneNumber = phoneNumber.replaceAll(char, '');
   }
 
-  if (Number.isNaN(Number.parseInt(phoneNumber, 10))) {
+  if (Number.isNaN(Number(phoneNumber))) {
     throw new TypeError('Must not contain letters or symbols');
   }
 
@@ -218,29 +228,29 @@ const isUkPhoneNumber = (phoneNumber) => {
  * Validates that a phone number is a genuine UK phone number.
  *
  * @param {string} phoneNumber The phone number to validate.
- * @returns {string} Returns the number prefixed with the UK country prefix (44).
+ * @returns {string} Returns the phone number if it passes validation, else throws an error.
  */
 const validateUkPhoneNumber = (phoneNumber) => {
-  phoneNumber = normalisePhoneNumber(phoneNumber);
-  phoneNumber = lTrim(phoneNumber, ukPrefix);
-  phoneNumber = lTrim(phoneNumber, '0');
+  let number = normalisePhoneNumber(phoneNumber);
+  number = lTrim(number, ukPrefix);
+  number = lTrim(number, '0');
 
-  if (phoneNumber.length < 8) {
+  if (number.length < 8) {
     throw new Error('Not enough digits');
   }
 
-  if (phoneNumber.length > 11) {
+  if (number.length > 10) {
     throw new Error('Too many digits');
   }
 
-  return ukPrefix + phoneNumber;
+  return phoneNumber;
 };
 
 /**
  * Validates a phone number, first checking if its a UK number or not, then checking its length and
  * if it has a valid country prefix.
  *
- * @param {*} phoneNumber The phone number to validate.
+ * @param {string} phoneNumber The phone number to validate.
  * @returns {string} Returns the phone number if it passes validation, else throws an error.
  */
 const validatePhoneNumber = (phoneNumber) => {
@@ -248,17 +258,17 @@ const validatePhoneNumber = (phoneNumber) => {
     return validateUkPhoneNumber(phoneNumber);
   }
 
-  phoneNumber = normalisePhoneNumber(phoneNumber);
+  const number = normalisePhoneNumber(phoneNumber);
 
-  if (phoneNumber.length < 8) {
+  if (number.length < 8) {
     throw new Error('Not enough digits');
   }
 
-  if (phoneNumber.length > 15) {
+  if (number.length > 15) {
     throw new Error('Too many digits');
   }
 
-  if (!validateInternationalPrefix(phoneNumber)) {
+  if (!validateInternationalPrefix(number)) {
     throw new Error('Not a valid country prefix');
   }
 
@@ -273,13 +283,13 @@ const validatePhoneNumber = (phoneNumber) => {
  * @returns {string} Returns the trimmed string.
  */
 const lTrim = (string, chars) => {
-  let start = 0;
+  let index = 0;
 
-  while (chars.indexOf(string[start]) >= 0) {
-    start += 1;
+  while (chars.includes(string[index])) {
+    index += 1;
   }
 
-  return string.substr(start);
+  return string.slice(index);
 };
 
 module.exports = {validateEmailAddress, validateAndFormatEmailAddress, validatePhoneNumber};

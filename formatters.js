@@ -22,7 +22,21 @@ const obscureWhitespace = [
   '\uFEFF' // Zero width non-breaking space
 ];
 
-const allWhitespace = whitespace + obscureWhitespace;
+const allWhitespace = [
+  '\u180E', // Mongolian vowel separator
+  '\u200B', // Zero width space
+  '\u200C', // Zero width non-joiner
+  '\u200D', // Zero width joiner
+  '\u2060', // Word joiner
+  '\u00A0', // Non breaking space
+  '\uFEFF', // Zero width non-breaking space
+  '\u0020', // Space
+  '\u0009', // Tab
+  '\u000A', // Linefeed
+  '\u000D', // Return
+  '\u000C', // Formfeed
+  '\u000B' // Vertical tab
+];
 
 /**
  * Formats a string by removing obscure whitespace and stripping regular
