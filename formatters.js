@@ -22,6 +22,8 @@ const obscureWhitespace = [
   '\uFEFF' // Zero width non-breaking space
 ];
 
+// Originally found in `notifications_utils/formatters.py#L32`, at
+// the above repo.
 const allWhitespace = [
   '\u180E', // Mongolian vowel separator
   '\u200B', // Zero width space

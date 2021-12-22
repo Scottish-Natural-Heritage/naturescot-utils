@@ -105,6 +105,12 @@ test('validateEmailAddress throws for invalid', (t) => {
   }
 });
 
+/**
+ * The test data here was Originally found in `tests/test_recipient_validation.py#L22-L47`
+ * and `tests/test_recipient_validation.py#L53-L85`, at the above repo. It has been modified
+ * slightly to allow for land line numbers as the original tests dealt with mobile numbers
+ * only.
+ */
 test('validatePhoneNumber correctly validates valid phone numbers', (t) => {
   const validUkPhoneNumbers = [
     '7123456789',

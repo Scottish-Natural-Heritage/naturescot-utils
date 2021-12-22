@@ -168,6 +168,9 @@ const validateAndFormatEmailAddress = (emailAddress) => {
 /**
  * Validates an international prefix against an array of international prefixes.
  *
+ * Originally found in `notifications_utils/recipients.py#L427-L432`, at
+ * the above repo. Modified slightly to return true if valid prefix, else false.
+ *
  * @param {string} phoneNumber The phone number whose prefix is to be validated.
  * @returns {boolean} Returns true if prefix is valid, else false.
  */
@@ -184,6 +187,9 @@ const validateInternationalPrefix = (phoneNumber) => {
 /**
  * Normalises a phone number by removing all whitespace, brackets, and `-` and `+` characters, then checks
  * we have an actual number before removing any leading zero.
+ *
+ * Originally found in `notifications_utils/recipients.py#L364-L374`, at
+ * the above repo.
  *
  * @param {string} phoneNumber The phone number to normalise.
  * @returns {string} Returns the normalised phone number.
@@ -207,6 +213,9 @@ const normalisePhoneNumber = (phoneNumber) => {
  * Checks a phone number is a UK number or not, checking the number starts with 0 and not 00,
  * then normalising the number and checking if it has a UK country prefix or starts with 7.
  *
+ * Originally found in `notifications_utils/recipients.py#L377-L392`, at
+ * the above repo.
+ *
  * @param {string} phoneNumber The phone number to check.
  * @returns {boolean} Returns true if number is a UK number, else false.
  */
@@ -226,6 +235,10 @@ const isUkPhoneNumber = (phoneNumber) => {
 
 /**
  * Validates that a phone number is a genuine UK phone number.
+ *
+ * Originally found in `notifications_utils/recipients.py#L443-L456`, at
+ * the above repo. Modified slightly to allow for longer or shorter land line
+ * numbers, original only considered mobile numbers.
  *
  * @param {string} phoneNumber The phone number to validate.
  * @returns {string} Returns the phone number if it passes validation, else throws an error.
@@ -249,6 +262,9 @@ const validateUkPhoneNumber = (phoneNumber) => {
 /**
  * Validates a phone number, first checking if its a UK number or not, then checking its length and
  * if it has a valid country prefix.
+ *
+ * Originally found in `notifications_utils/recipients.py#L459-L475`, at
+ * the above repo.
  *
  * @param {string} phoneNumber The phone number to validate.
  * @returns {string} Returns the phone number if it passes validation, else throws an error.
