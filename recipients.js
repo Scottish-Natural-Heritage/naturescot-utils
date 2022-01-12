@@ -29,11 +29,11 @@ const emailRegexPattern = new RegExp(`^[${validLocalChars}]+@([^.@][^@\\s]+)$`);
 // United Kingdom country prefix.
 const ukPrefix = '44';
 
-// Disable as linter wants new line between each element in the COUNTRY_PREFIXES array and this looks silly.
+// Disable as linter wants new line between each element in the countryPrefixes array and this looks silly.
 /* eslint-disable prettier/prettier */
 
 // Originally found in and extracted from `notifications_utils/international_billing_rates.yml#line 44 - line 2891` at the above repo.
-const COUNTRY_PREFIXES = [
+const countryPrefixes = [
   '1876', '1869', '1868', '1784', '1767', '1758', '1721',
   '1684', '1664', '1649', '1473', '1441', '1345', '1284',
   '1268', '1264', '1246', '1242',
@@ -175,7 +175,7 @@ const validateAndFormatEmailAddress = (emailAddress) => {
  * @returns {boolean} Returns true if prefix is valid, else false.
  */
 const validateInternationalPrefix = (phoneNumber) => {
-  for (const prefix of COUNTRY_PREFIXES) {
+  for (const prefix of countryPrefixes) {
     if (phoneNumber.startsWith(prefix)) {
       return true;
     }
@@ -195,8 +195,7 @@ const validateInternationalPrefix = (phoneNumber) => {
  * @returns {string} Returns the normalised phone number.
  */
 const normalisePhoneNumber = (phoneNumber) => {
-  const charactersToRemove = formatters.allWhitespace;
-  charactersToRemove.push('(', ')', '-', '+');
+  const charactersToRemove = [...formatters.allWhitespace, '(', ')', '-', '+']
 
   for (const char of charactersToRemove) {
     phoneNumber = phoneNumber.replaceAll(char, '');
