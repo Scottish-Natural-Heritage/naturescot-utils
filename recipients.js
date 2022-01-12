@@ -195,7 +195,7 @@ const validateInternationalPrefix = (phoneNumber) => {
  * @returns {string} Returns the normalised phone number.
  */
 const normalisePhoneNumber = (phoneNumber) => {
-  const charactersToRemove = [...formatters.allWhitespace, '(', ')', '-', '+']
+  const charactersToRemove = [...formatters.allWhitespace, '(', ')', '-', '+'];
 
   for (const char of charactersToRemove) {
     phoneNumber = phoneNumber.replaceAll(char, '');
