@@ -104,3 +104,89 @@ test('validateEmailAddress throws for invalid', (t) => {
     t.is(error.message, 'Not a valid email address');
   }
 });
+
+/**
+ * The test data here was Originally found in `tests/test_recipient_validation.py#L22-L47`
+ * and `tests/test_recipient_validation.py#L53-L85`, at the above repo. It has been modified
+ * slightly to allow for land line numbers as the original tests dealt with mobile numbers
+ * only.
+ */
+test('validatePhoneNumber correctly validates valid phone numbers', (t) => {
+  const validUkPhoneNumbers = [
+    '7123456789',
+    '07123456789',
+    '07123 456789',
+    '07123-456-789',
+    '00447123456789',
+    '00 44 7123456789',
+    '+447123456789',
+    '+44 7123 456 789',
+    '+44 (0)7123 456 789',
+    '\u200B\t\t+44 (0)7123 \uFEFF 456 789 \r\n'
+  ];
+
+  const validInternationalPhoneNumbers = [
+    '71234567890',
+    '1-202-555-0104',
+    '+12025550104',
+    '0012025550104',
+    '+0012025550104',
+    '23051234567',
+    '+682 12345',
+    '+3312345678',
+    '003312345678',
+    '1-2345-12345-12345'
+  ];
+
+  const validPhoneNumbers = validUkPhoneNumbers.concat(validInternationalPhoneNumbers);
+
+  for (const phoneNumber of validPhoneNumbers) {
+    t.is(recipients.validatePhoneNumber(phoneNumber), phoneNumber);
+  }
+});
+
+test('validatePhoneNumber correctly validates invalid phone numbers', (t) => {
+  const invalidUkPhoneNumbersTooBig = [
+    '07123456789101',
+    '00447123456789101',
+    '00447123456789101',
+    '+44 (0)7123 456 789 101',
+    '01234-567-890-123'
+  ];
+
+  const invalidUkPhoneNumbersTooSmall = ['07123456', '00447123456', '00447123456', '+44 (0)7123 456'];
+
+  const invalidUkPhoneNumbersBadCharacters = [
+    '07890x32109',
+    '07123 456789...',
+    '07123 ☟☜⬇⬆☞☝',
+    '07123☟☜⬇⬆☞☝',
+    '07";DROP TABLE;"',
+    '+44 07ab cde fgh',
+    'ALPHANUM3R1C'
+  ];
+
+  for (const phoneNumber of invalidUkPhoneNumbersTooBig) {
+    const error = t.throws(() => {
+      recipients.validatePhoneNumber(phoneNumber);
+    });
+
+    t.is(error.message, 'Too many digits');
+  }
+
+  for (const phoneNumber of invalidUkPhoneNumbersTooSmall) {
+    const error = t.throws(() => {
+      recipients.validatePhoneNumber(phoneNumber);
+    });
+
+    t.is(error.message, 'Not enough digits');
+  }
+
+  for (const phoneNumber of invalidUkPhoneNumbersBadCharacters) {
+    const error = t.throws(() => {
+      recipients.validatePhoneNumber(phoneNumber);
+    });
+
+    t.is(error.message, 'Must not contain letters or symbols');
+  }
+});
