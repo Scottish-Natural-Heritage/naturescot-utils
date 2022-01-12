@@ -63,5 +63,18 @@ declare const utils: {
      * @throws {Error} An error message, if the email address is not valid.
      */
     validateEmailAddress(value: string): string;
+
+    /**
+     * Validates that a phone number matches the rules required to be
+     * accepted by GOV.UK Notify (modified slightly to allow for land-line numbers).
+     *
+     * Originally found in ``notifications_utils/recipients.py#L459-L475`, at
+     * the above repo.
+     *
+     * @param {string} phoneNumber A candidate phone number.
+     * @returns {string} The phone number, if valid.
+     * @throws {Error} An error message, if the phone number is not valid.
+     */
+    validatePhoneNumber(value: string): string;
   };
 };
