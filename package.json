@@ -12,14 +12,17 @@
     "Murray Holmes <murray.holmes@nature.scot> (https://github.com/murrayholmes96)",
     "Dominic Lynch <dominic.lynch@nature.scot> (https://github.com/finchie)"
   ],
+  "type": "module",
   "files": [
     "**/*.js",
+    "**/*.mjs",
     "**/*.d.ts",
     "!**/*.test.js",
+    "!**/*.test.mjs",
     "**/*.md",
     "**/*.txt"
   ],
-  "main": "index.mjs",
+  "exports": "./index.mjs",
   "repository": "github:Scottish-Natural-Heritage/naturescot-utils",
   "scripts": {
     "lint": "cspell \"**/*.js\" \"package.json\" && xo",
