@@ -8,6 +8,13 @@ const inputEncoding = 'utf8';
 const outputEncoding = 'hex';
 const ivLength = 16;
 
+/**
+ * Encrypts plaintext with the specified password.
+ *
+ * @param {string} plaintext The plain text to encrypt.
+ * @param {string} password The password to use in encrypting the plaintext.
+ * @returns {string} The encrypted text.
+ */
 export const encrypt = (plaintext, password) => {
   const key = Buffer.from(password.slice(0, keyLength), inputEncoding);
   const iv = crypto.randomBytes(ivLength);
@@ -17,6 +24,13 @@ export const encrypt = (plaintext, password) => {
   return ciphertext;
 };
 
+/**
+ * Decrypts encrypted text with the specified password.
+ *
+ * @param {string} ciphertext The encrypted text to decrypt.
+ * @param {string} password The password to use in decrypting the ciphertext.
+ * @returns {string} The decrypted text.
+ */
 export const decrypt = (ciphertext, password) => {
   const key = Buffer.from(password.slice(0, keyLength), inputEncoding);
   const components = ciphertext.split(':');

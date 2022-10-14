@@ -92,4 +92,4 @@ const removeWhitespace = (value) => {
   return modifiedValue;
 };
 
-module.exports = {stripAndRemoveObscureWhitespace, removeWhitespace, allWhitespace};
+export {stripAndRemoveObscureWhitespace, removeWhitespace, allWhitespace};

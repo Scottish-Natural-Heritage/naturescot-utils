@@ -1,6 +1,6 @@
-const uts46 = require('idna-uts46-hx');
+import uts46 from 'idna-uts46-hx';
 
-const formatters = require('./formatters.js');
+import * as Formatters from './formatters.mjs';
 
 /**
  * This file is a translation of the `recipients.py` python file from
@@ -84,7 +84,7 @@ const validateEmailAddress = (emailAddress) => {
   // are a lot stricter with the local part than necessary - we don't
   // allow any double quotes or semicolons to prevent SES Technical
   // Failures.
-  const trimmedEmailAddress = formatters.stripAndRemoveObscureWhitespace(emailAddress);
+  const trimmedEmailAddress = Formatters.stripAndRemoveObscureWhitespace(emailAddress);
   const match = trimmedEmailAddress.match(emailRegexPattern);
 
   // Not an email.
@@ -147,7 +147,7 @@ const validateEmailAddress = (emailAddress) => {
  * @returns {string} A formatted copy of the email address.
  */
 const formatEmailAddress = (emailAddress) => {
-  return formatters.stripAndRemoveObscureWhitespace(emailAddress.toLowerCase());
+  return Formatters.stripAndRemoveObscureWhitespace(emailAddress.toLowerCase());
 };
 
 /**
@@ -195,7 +195,7 @@ const validateInternationalPrefix = (phoneNumber) => {
  * @returns {string} Returns the normalised phone number.
  */
 const normalisePhoneNumber = (phoneNumber) => {
-  const charactersToRemove = [...formatters.allWhitespace, '(', ')', '-', '+'];
+  const charactersToRemove = [...Formatters.allWhitespace, '(', ')', '-', '+'];
 
   for (const char of charactersToRemove) {
     phoneNumber = phoneNumber.replaceAll(char, '');
@@ -307,4 +307,4 @@ const lTrim = (string, chars) => {
   return string.slice(index);
 };
 
-module.exports = {validateEmailAddress, validateAndFormatEmailAddress, validatePhoneNumber};
+export {validateEmailAddress, validateAndFormatEmailAddress, validatePhoneNumber};

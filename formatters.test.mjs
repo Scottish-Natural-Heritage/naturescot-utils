@@ -1,7 +1,7 @@
-const test = require('ava');
+import test from 'ava';
 
 // Import the library like a 'consumer' would.
-const formatters = require('.').formatters;
+import * as Formatters from './formatters.mjs';
 
 /**
  * This file is a translation of the `test_formatters.py` python file from
@@ -24,7 +24,7 @@ test('stripAndRemoveObscureWhitespace', (t) => {
     '\rn\u200Coti\u200Dfi\u200Bcati\u2060ons-\u180Eemai\uFEFFl\uFEFF'
   ];
   for (const value of values) {
-    t.is(formatters.stripAndRemoveObscureWhitespace(value), 'notifications-email');
+    t.is(Formatters.stripAndRemoveObscureWhitespace(value), 'notifications-email');
   }
 });
 
@@ -32,5 +32,5 @@ test('stripAndRemoveObscureWhitespace', (t) => {
 // above repo.
 test('stripAndRemoveObscureWhitespace only removes normal whitespace from ends', (t) => {
   const sentence = '   words \n over multiple lines with \ttabs\t   ';
-  t.is(formatters.stripAndRemoveObscureWhitespace(sentence), 'words \n over multiple lines with \ttabs');
+  t.is(Formatters.stripAndRemoveObscureWhitespace(sentence), 'words \n over multiple lines with \ttabs');
 });
