@@ -19,7 +19,7 @@
     "**/*.md",
     "**/*.txt"
   ],
-  "main": "index.js",
+  "main": "index.mjs",
   "repository": "github:Scottish-Natural-Heritage/naturescot-utils",
   "scripts": {
     "lint": "cspell \"**/*.js\" \"package.json\" && xo",
@@ -29,12 +29,14 @@
     "idna-uts46-hx": "^3.4.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
     "ava": "^4.3.3",
     "cspell": "^5.5.2",
-    "eslint-plugin-editorconfig": "^3.0.2",
-    "eslint-plugin-jsdoc": "^35.1.2",
+    "eslint-plugin-editorconfig": "^4.0.2",
+    "eslint-plugin-jsdoc": "^39.3.6",
     "prettier": "^2.3.0",
-    "xo": "^0.40.2"
+    "typescript": "^4.8.4",
+    "xo": "^0.52.4"
   },
   "xo": {
     "space": 2,
@@ -48,7 +50,6 @@
       "plugin:editorconfig/all"
     ],
     "rules": {
-      "jsdoc/check-examples": 1,
       "jsdoc/check-indentation": 1,
       "jsdoc/check-syntax": 1,
       "jsdoc/match-description": 1,
