@@ -77,4 +77,23 @@ declare const utils: {
      */
     validatePhoneNumber(value: string): string;
   };
+  crypto: {
+    /**
+     * Encrypts plaintext with the specified password.
+     *
+     * @param {string} plaintext The plain text to encrypt.
+     * @param {string} password The password to use in encrypting the plaintext.
+     * @returns {string} The encrypted text.
+     */
+    encrypt(plaintext: string, password: string): string;
+
+    /**
+     * Decrypts encrypted text with the specified password.
+     *
+     * @param {string} ciphertext The encrypted text to decrypt.
+     * @param {string} password The password to use in decrypting the ciphertext.
+     * @returns {string} The decrypted text.
+     */
+    decrypt(ciphertext: string, password: string): string;
+  };
 };
