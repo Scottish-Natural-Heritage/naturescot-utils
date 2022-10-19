@@ -1,7 +1,7 @@
-import test from 'ava';
+const test = require('ava');
 
 // Import the library like a 'consumer' would.
-import * as postalAddress from './postal-address.mjs';
+const postalAddress = require('.').postalAddress;
 
 /**
  * This file is a translation of the `test_postal_address.py` python file from

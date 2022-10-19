@@ -1,6 +1,6 @@
 {
   "name": "naturescot-utils",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Shared code between NatureScot applications",
   "homepage": "https://github.com/Scottish-Natural-Heritage/naturescot-utils#readme",
   "bugs": {
@@ -12,17 +12,14 @@
     "Murray Holmes <murray.holmes@nature.scot> (https://github.com/murrayholmes96)",
     "Dominic Lynch <dominic.lynch@nature.scot> (https://github.com/finchie)"
   ],
-  "type": "module",
   "files": [
     "**/*.js",
-    "**/*.mjs",
     "**/*.d.ts",
     "!**/*.test.js",
-    "!**/*.test.mjs",
     "**/*.md",
     "**/*.txt"
   ],
-  "exports": "./index.mjs",
+  "main": "./index.js",
   "repository": "github:Scottish-Natural-Heritage/naturescot-utils",
   "scripts": {
     "lint": "cspell \"**/*.js\" \"package.json\" && xo",

@@ -1,6 +1,6 @@
-import {Buffer} from 'node:buffer';
-import test from 'ava';
-import * as Crypto from './crypto.mjs';
+const Buffer = require('node:buffer').Buffer;
+const test = require('ava');
+const Crypto = require('./crypto.js');
 
 const encryptionKey32Bytes = 'W7EWmp213EaChaiJg1X93QdxQ9ZWHzEm';
 const encryptionKeyTooLong = 'W7EWmp213EaChaiJg1X93QdxQ9ZWHzEmFk6oU4URgqA';
