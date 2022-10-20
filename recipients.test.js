@@ -1,7 +1,7 @@
-import test from 'ava';
+const test = require('ava');
 
 // Import the library like a 'consumer' would.
-import * as Recipients from './recipients.mjs';
+const recipients = require('.').recipients;
 
 /**
  * This file is a translation of the `test_recipient_validation.py`
@@ -40,7 +40,7 @@ test('validateEmailAddress accepts valid', (t) => {
   ];
 
   for (const emailAddress of validEmailAddresses) {
-    t.is(Recipients.validateEmailAddress(emailAddress), emailAddress);
+    t.is(recipients.validateEmailAddress(emailAddress), emailAddress);
   }
 });
 
@@ -55,7 +55,7 @@ test('validateEmailAddress strips whitespace', (t) => {
   ];
 
   for (const emailAddress of emailAddresses) {
-    t.is(Recipients.validateEmailAddress(emailAddress), 'email@domain.com');
+    t.is(recipients.validateEmailAddress(emailAddress), 'email@domain.com');
   }
 });
 
@@ -98,7 +98,7 @@ test('validateEmailAddress throws for invalid', (t) => {
 
   for (const emailAddress of invalidEmailAddresses) {
     const error = t.throws(() => {
-      Recipients.validateEmailAddress(emailAddress);
+      recipients.validateEmailAddress(emailAddress);
     });
 
     t.is(error.message, 'Not a valid email address');
@@ -141,7 +141,7 @@ test('validatePhoneNumber correctly validates valid phone numbers', (t) => {
   const validPhoneNumbers = validUkPhoneNumbers.concat(validInternationalPhoneNumbers);
 
   for (const phoneNumber of validPhoneNumbers) {
-    t.is(Recipients.validatePhoneNumber(phoneNumber), phoneNumber);
+    t.is(recipients.validatePhoneNumber(phoneNumber), phoneNumber);
   }
 });
 
@@ -168,7 +168,7 @@ test('validatePhoneNumber correctly validates invalid phone numbers', (t) => {
 
   for (const phoneNumber of invalidUkPhoneNumbersTooBig) {
     const error = t.throws(() => {
-      Recipients.validatePhoneNumber(phoneNumber);
+      recipients.validatePhoneNumber(phoneNumber);
     });
 
     t.is(error.message, 'Too many digits');
@@ -176,7 +176,7 @@ test('validatePhoneNumber correctly validates invalid phone numbers', (t) => {
 
   for (const phoneNumber of invalidUkPhoneNumbersTooSmall) {
     const error = t.throws(() => {
-      Recipients.validatePhoneNumber(phoneNumber);
+      recipients.validatePhoneNumber(phoneNumber);
     });
 
     t.is(error.message, 'Not enough digits');
@@ -184,7 +184,7 @@ test('validatePhoneNumber correctly validates invalid phone numbers', (t) => {
 
   for (const phoneNumber of invalidUkPhoneNumbersBadCharacters) {
     const error = t.throws(() => {
-      Recipients.validatePhoneNumber(phoneNumber);
+      recipients.validatePhoneNumber(phoneNumber);
     });
 
     t.is(error.message, 'Must not contain letters or symbols');

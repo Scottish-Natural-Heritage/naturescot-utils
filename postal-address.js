@@ -1,4 +1,4 @@
-import * as Formatters from './formatters.mjs';
+const formatters = require('./formatters.js');
 
 /**
  * This file is a translation of the `postal_address.py` python file from
@@ -23,7 +23,7 @@ import * as Formatters from './formatters.mjs';
  * @returns {string} The postcode after being formatted with whitespace removed.
  */
 const normalisePostcode = (postcode) => {
-  return Formatters.removeWhitespace(postcode).toUpperCase();
+  return formatters.removeWhitespace(postcode).toUpperCase();
 };
 
 /**
@@ -66,4 +66,4 @@ const formatPostcodeForPrinting = (postcode) => {
   return normalised.slice(0, -3) + ' ' + normalised.slice(-3, normalised.length);
 };
 
-export {normalisePostcode, isaRealUkPostcode, formatPostcodeForPrinting};
+module.exports = {normalisePostcode, isaRealUkPostcode, formatPostcodeForPrinting};
